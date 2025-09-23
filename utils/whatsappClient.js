@@ -1,16 +1,16 @@
-import venom from "venom-bot"
+// import venom from "venom-bot"
 
-let client
+// let client
 
-async function getClient() {
-  if (client) return client
+// async function getClient() {
+//   if (client) return client
 
-  client = await venom.create({
-    session: 'bookstore-session',
-    puppeteerOptions: { headless: true }
-  })
+//   client = await venom.create({
+//     session: 'bookstore-session',
+//     puppeteerOptions: { headless: true }
+//   })
 
-  return client
-}
+//   return client
+// }
 
-export default getClient
+// export default getClient

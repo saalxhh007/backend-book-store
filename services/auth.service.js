@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken"
 import User from "../models/userModel.js";
 import jwtTokens from "./../config/jwt.js"
 import hashUtils from "./../utils/hash.js"
-import getClient from "../utils/whatsappClient.js";
 import normalizeNum from "../utils/phoneUtils.js";
 import authService from "./../utils/hash.js"
 import { generateAccessToken, generateRefreshToken } from "../utils/token.js";
