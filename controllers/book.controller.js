@@ -49,7 +49,7 @@ export const getBooks = async (req, res) => {
 
     const books = await Book.findAll({
       include: [include],
-      order: [["created_at", "DESC"]]
+      order: [["publication_date", "DESC"]]
     })
 
     if (!books.length) {
