@@ -3,13 +3,13 @@ import jwt from "jsonwebtoken"
 import User from "../models/userModel.js";
 import jwtTokens from "./../config/jwt.js"
 import hashUtils from "./../utils/hash.js"
-import getClient from "../utils/whatsappClient.js";
+// import getClient from "../utils/whatsappClient.js";
 import normalizeNum from "../utils/phoneUtils.js";
 import authService from "./../utils/hash.js"
 import { generateAccessToken, generateRefreshToken } from "../utils/token.js";
 import Address from "../models/addressModel.js";
 
-const verificationCodes = new Map()
+// const verificationCodes = new Map()
 
 async function signUp({ email, password, full_name, phone, address }) {
     const existing = await User.findOne({ where: { email } })
@@ -107,58 +107,37 @@ async function verifyEmail(token) {
   return user;
 }
 
-async function verifyWhatsAppCode(email, code) {
-  const savedCode = verificationCodes.get(email);
+// async function verifyWhatsAppCode(email, code) {
+//   const savedCode = verificationCodes.get(email);
 
-  if (savedCode && savedCode === code) {
-    const user = await User.findOne({ where: { email } });
-    if (!user) throw new Error('User not found');
+//   if (savedCode && savedCode === code) {
+//     const user = await User.findOne({ where: { email } });
+//     if (!user) throw new Error('User not found');
 
-    user.is_phone_verified = true;
-    await user.save();
+//     user.is_phone_verified = true;
+//     await user.save();
 
-    verificationCodes.delete(email);
-    return user;
-  } else {
-    throw new Error('Invalid verification code');
-  }
-}
+//     verificationCodes.delete(email);
+//     return user;
+//   } else {
+//     throw new Error('Invalid verification code');
+//   }
+// }
 
-async function sendWhatsAppVerification(phone, code) {
-  const client = await getClient();
+// async function sendWhatsAppVerification(phone, code) {
+//   const client = await getClient();
 
-  const waId = phone.replace(/^\+/, '') + '@c.us';
+//   const waId = phone.replace(/^\+/, '') + '@c.us';
 
-  const message = `Your BookStore verification code is: *${code}*`;
+//   const message = `Your BookStore verification code is: *${code}*`;
 
-  try {
-    await client.sendText(waId, message);
-  } catch (error) {
-    console.error('Failed to send WhatsApp message:', error);
-    throw new Error('WhatsApp message sending failed');
-  }
-}
-
-async function createAdmin({ email, password, full_name, phone }) {
-    try {
-    const hashedPassword = await hashUtils.hashValue(password)
-    const normalizedPhone = normalizeNum(phone)
-      const user = await User.create({
-      email,
-      phone: normalizedPhone,
-      password_hash: hashedPassword,
-      full_name,
-      is_active: true,
-      is_email_verified: true,
-      is_phone_verified: true,
-      role: "admin"
-      })
-      return user
-    } catch (error) {
-      throw error
-    }
-
-}
+//   try {
+//     await client.sendText(waId, message);
+//   } catch (error) {
+//     console.error('Failed to send WhatsApp message:', error);
+//     throw new Error('WhatsApp message sending failed');
+//   }
+// }
 
 export default {
     signUp,
@@ -166,5 +145,5 @@ export default {
     logout,
     refreshToken,
     verifyEmail,
-    verifyWhatsAppCode,
+    // verifyWhatsAppCode,
 }
