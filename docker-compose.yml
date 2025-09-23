@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: bookstore-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 192837465s
+      MYSQL_DATABASE: bookstore
+      MYSQL_USER: bookstore_admin
+      MYSQL_PASSWORD: 192837465s
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: bookstore-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: bookstore_user
+      PMA_PASSWORD: bookstore_pass
+    ports:
+      - "8080:80"
+
+volumes:
+  mysql_data:
