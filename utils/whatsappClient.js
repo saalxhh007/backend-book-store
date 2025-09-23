@@ -13,4 +13,8 @@
 //   return client
 // }
 
+<<<<<<< HEAD
 // export default getClient
+=======
+// export default getClient
+>>>>>>> 694471df7bc3baacdb9288bd140b31b56d0529c3
