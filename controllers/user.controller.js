@@ -19,6 +19,17 @@ async function signup(req, res) {
   }
 }
 
+async function createAdmin(req, res) {
+  try {
+    const user = await authService.createAdmin(req.body);
+    res.status(201).json({
+      message: 'Admin created',
+      user
+    });
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+}
 async function login(req, res) {
   try {
     const { accessToken, refreshToken, user } = await authService.login(req.body)
@@ -73,4 +84,4 @@ async function all(req, res) {
   }
 }
 
-export default { signup, login, logout, refresh , all}
+export default { signup, login, logout, refresh, createAdmin , all}

@@ -2,11 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "./../../config/db.js"
 
 const Book = db.define("Book", {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: db.literal("gen_random_uuid()"),
-    primaryKey: true,
-  },
+  id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
   title: { type: DataTypes.STRING, allowNull: false },
   author: { type: DataTypes.STRING, defaultValue: "Unknown" },
   description: { type: DataTypes.TEXT },

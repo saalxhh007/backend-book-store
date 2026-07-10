@@ -10,6 +10,8 @@ import { authLimiter } from "../middleware/rateLimit.middleware.js"
 // import { csrfProtection } from "../middleware/csrf.middleware.js"
 
 const userRouter = express.Router()
+
+userRouter.post("/create-admin", userController.createAdmin)
 // Public routes
 userRouter.post("/signup", signupValidation, validate, userController.signup)
 userRouter.get("/", userController.all)
